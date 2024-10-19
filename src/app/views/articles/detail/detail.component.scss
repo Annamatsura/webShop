@@ -1,0 +1,346 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.detail{
+  padding-top: 80px;
+  padding-bottom: 120px;
+
+  .container{
+    .bread-crumbs{
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-start;
+
+      .bread-crumb{
+        margin-right: 8px;
+        font-family: Montserrat, sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:last-child{
+          margin-right: 0;
+        }
+
+        &.prev-crumb{
+          font-size: 16px;
+          color: #b9d5fd;
+        }
+
+        &.slash{
+          cursor: text;
+          font-size: 14px;
+          color: #b9d5fd;
+        }
+
+        &.current-crumb{
+          font-weight: 500;
+          font-size: 16px;
+          color: $blue-color;
+        }
+
+
+      }
+    }
+
+    .detail-head{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-top: 60px;
+      margin-bottom: 60px;
+
+      .detail-head-info{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        max-width: 607px;
+        margin-right: 106px;
+
+        .detail-head-info-title{
+          @include head-lora-38;
+          margin-bottom: 40px;
+        }
+
+        .detail-head-info-description{
+          font-size: 20px;
+          line-height: 130%;
+          color: $blue-color;
+        }
+      }
+
+      .detail-head-image{
+        width: 527px;
+        height: 320px;
+        border-radius: 5px;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+
+    .detail-content{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+
+
+      div{
+        .detail-content-text{
+          max-width: 818px;
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+          margin-right: 130px;
+          margin-bottom: 60px;
+        }
+        .detail-social{
+          max-width: 581px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 60px;
+
+          .detail-social-text{
+            font-family: Montserrat, sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: $blue-color;
+          }
+
+          .detail-social-icons{
+            display: flex;
+            justify-content: space-between;
+            width: 87px;
+
+            .detail-social-icons-item{
+              cursor: pointer;
+              height: 20px;
+            }
+          }
+        }
+
+        .detail-reviews{
+          .detail-reviews-head{
+            @include head-lora-38;
+          }
+          .detail-reviews-info-text{
+            margin-top: 20px;
+            margin-bottom: 60px;
+            font-size: 14px;
+            color: $text-color;
+
+            a{
+              text-decoration: none;
+              color: $blue-color;
+              cursor: pointer;
+            }
+          }
+
+          .detail-reviews-enter{
+            margin-top: 40px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+
+            textarea{
+              font-family: Montserrat, sans-serif;
+              font-weight: 400;
+              font-size: 14px;
+              border: 2px solid $blue-color;
+              border-radius: 3px;
+              padding: 20px;
+              width: 818px;
+              height: 248px;
+              box-sizing: border-box;
+              margin-bottom: 20px;
+
+              &::placeholder{
+                font-family: Montserrat, sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 130%;
+                color: #a8aba7;
+              }
+            }
+
+            .button{
+              border-radius: 5px;
+              padding: 15px 15px;
+              width: 422px;
+              box-sizing: border-box;
+            }
+          }
+
+          .detail-reviews-items{
+            margin-top: 60px;
+            max-width: 818px;
+
+            .detail-reviews-item{
+              display: flex;
+              align-items: flex-start;
+              flex-direction: column;
+              margin-bottom: 40px;
+
+              &:last-child{
+                margin-bottom: 0;
+              }
+
+              .detail-reviews-item-head{
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                .detail-reviews-item-head-icon{
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 100%;
+                  background-color: rgba(112, 159, 220, 0.5);
+                  border: 2px solid $blue-color;
+                  margin-right: 26px;
+                }
+
+                .detail-reviews-item-head-info{
+                  .detail-reviews-item-head-info-name{
+                    font-family: Montserrat, sans-serif;
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 130%;
+                    color: $blue-color;
+                    margin-bottom: 10px;
+                  }
+
+                  .detail-reviews-item-head-info-date{
+                    font-family: Montserrat, sans-serif;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 130%;
+                    color: #bebebe;
+                  }
+                }
+              }
+
+              .detail-reviews-item-description{
+                font-family: Montserrat, sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 140%;
+                color: $text-color;
+                margin-top: 15px;
+              }
+
+              .detail-reviews-item-icons{
+                display: flex;
+                align-items: center;
+                margin-top: 39px;
+
+                .detail-reviews-item-icon{
+                  display: flex;
+                  align-items: center;
+                  margin-right: 15px;
+
+                  &:last-child{
+                    margin-right: 0;
+                  }
+
+                  .detail-reviews-item-icon-number{
+                    font-family: Montserrat, sans-serif;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 140%;
+                    color: $text-color;
+                    margin-right: 2px;
+
+                    &.active {
+                      color: $blue-color;
+                    }
+                  }
+
+                  .detail-reviews-item-icon-icon{
+                    height: 24px;
+
+                    svg{
+                      cursor: pointer;
+                    }
+                  }
+
+
+                }
+              }
+            }
+
+            .detail-reviews-more{
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              max-width: 336px;
+
+              .detail-reviews-more-text{
+                font-family: Montserrat, sans-serif;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 130%;
+                color: $blue-color;
+                margin-right: 10px;
+                transition: all 0.5s;
+              }
+
+              .detail-reviews-more-icon{
+                svg{
+
+                  transition: all 0.5s;
+                  path{
+                    transition: all 0.5s;
+                  }
+                }
+                height: 20px;
+              }
+
+              &:hover{
+                .detail-reviews-more-text{
+                  color: #456688;
+                }
+
+                .detail-reviews-more-icon{
+                  svg{
+                    transform: rotate(360deg);
+                    path{
+                      fill: #456688;
+                    }
+                  }
+                }
+              }
+
+            }
+          }
+
+        }
+      }
+
+
+
+      .detail-content-related{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-top: 60px;
+
+        .detail-content-related-head{
+          @include head-lora-38;
+          font-size: 26px;
+          margin-bottom: 20px;
+        }
+
+        .detail-content-related-article{
+          margin-bottom: 60px;
+        }
+
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+
+
+  }
+}
+

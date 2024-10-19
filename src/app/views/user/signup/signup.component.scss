@@ -1,0 +1,22 @@
+@import "../../../../assets/styles/auth-form";
+
+.signup{
+  .container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .auth-form{
+      .auth-inputs{
+        .auth-checkbox{
+          //align-items: center;
+        }
+      }
+    }
+
+    .page-image{
+      margin-top: 123px;
+      margin-right: 40px;
+    }
+  }
+}

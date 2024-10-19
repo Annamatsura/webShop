@@ -1,0 +1,19 @@
+.policy{
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  .container{
+    div{
+      font-family: "Montserrat", sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      margin-bottom: 20px;
+
+      &.policy-head{
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+      }
+    }
+  }
+}

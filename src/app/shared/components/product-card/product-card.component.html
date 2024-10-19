@@ -1,0 +1,16 @@
+<a class="card-item" *ngIf="cart" (click)="navigate()">
+  <div class="card-item-part">
+    {{cart.category}}
+  </div>
+
+  <div class="card-item-image" style="background-image: url({{serverStaticPath + cart.image}})"></div>
+
+  <div class="card-item-name">{{cart.title}}</div>
+  <div class="card-item-description">{{cart.description  | textCut}}</div>
+
+  <div class="card-item-info">
+    <div class="card-item-info-action">
+      <a >Читать дальше</a>
+    </div>
+  </div>
+</a>

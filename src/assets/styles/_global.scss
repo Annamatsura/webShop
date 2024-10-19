@@ -1,0 +1,133 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+.container{
+  max-width: $container-width;
+  margin: 0 auto;
+}
+
+.button{
+  background-color: $blue-color;
+  border: 0;
+  border-radius: 5px;
+  text-align: center;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &.small-button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  &:disabled{
+    background: gray;
+    cursor: not-allowed;
+  }
+
+  &:hover:enabled{
+    background-color: #456688;
+  }
+
+}
+
+
+.mat-menu-content:not(:empty) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+button.mat-menu-item {
+  width: 160px !important;
+}
+
+.mat-menu-panel {
+  min-height: 48px !important;
+}
+
+.mat-menu-item {
+  font-family: "Montserrat", sans-serif ;
+  font-weight: 500;
+  font-size: 16px;
+  color: $text-color;
+}
+
+
+.card-item{
+
+
+  width: 291px;
+  height: 498px;
+  box-sizing: border-box;
+  position: relative;
+
+  .card-item-image{
+    width: 291px;
+    height: 291px;
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 15px;
+  }
+
+  .card-item-name{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: $blue-color;
+    margin-bottom: 10px;
+  }
+
+  .card-item-description{
+    font-size: 14px;
+    line-height: 130%;
+    color: $text-color;
+  }
+
+  .card-item-info{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+
+    .card-item-info-price{
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      color: $blue-color;
+    }
+
+    .card-item-info-action .button{
+      padding: 15px;
+      width: 163px;
+
+    }
+  }
+}
+
+
+.owl-theme .owl-nav.disabled+.owl-dots {
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 36px);
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: #fff;
+}
+.owl-theme .owl-dots .owl-dot span {
+  background: transparent;
+  border: 1px solid #fff;
+}
+

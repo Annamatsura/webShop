@@ -1,0 +1,27 @@
+@import "variables";
+
+h1{
+  display: none;
+}
+p{
+  font-size: 14px;
+  line-height: 130%;
+  color: $text-color;
+  margin-bottom: 20px;
+}
+
+h3{
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: $blue-color;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+b{
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: $text-color;
+}

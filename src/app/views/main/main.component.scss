@@ -1,0 +1,412 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/modal";
+
+
+.main{
+  .container{
+    .main-slider{
+      position: relative;
+
+      a{
+        top: calc(50% - 5px);
+        display: flex;
+        position: absolute;
+        cursor: pointer;
+        z-index: 4;
+
+        &.move-backward{
+          left: 11px;
+        }
+        &.move-forward{
+          right: 11px;
+        }
+      }
+
+
+
+      .main-slider-item{
+        height: 500px;
+
+        .main-slider-item-circle-block{
+          height: 500px;
+          width: 700px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          overflow: hidden;
+          z-index: 2;
+
+          .main-slider-item-circle{
+            background-color: #b9d5fd;
+            position: absolute;
+            border-radius: 100%;
+            width: 1406px;
+            height: 1406px;
+            top: -702px;
+            left: -707px;
+            z-index: 0;
+            background-clip: border-box;
+
+          }
+        }
+
+        .main-slider-item-info{
+          position: absolute;
+          left: 80px;
+          top: 100px;
+          z-index: 3;
+
+          .main-slider-item-info-category{
+            font-family: Montserrat, sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: $blue-color;
+          }
+
+          .main-slider-item-info-title{
+            font-family: Lora, sans-serif;
+            font-weight: 400;
+            font-size: 50px;
+            line-height: 130%;
+            color: #fff;
+            max-width: 576px;
+
+            span{
+              color: $blue-color;
+            }
+          }
+
+          .main-slider-item-info-description{
+            margin-top: 20px;
+            font-size: 24px;
+            line-height: 130%;
+            color: #fff;
+            max-width: 456px;
+          }
+
+          .main-slider-item-info-button{
+            margin-top: 45px;
+            button{
+              border-radius: 5px;
+              padding: 15px;
+              width: 163px;
+            }
+          }
+
+
+        }
+
+        .main-slider-item-image{
+          width: 750px;
+          height: 500px;
+          position: absolute;
+          right: 0;
+          z-index: -1;
+        }
+      }
+    }
+  }
+}
+
+.our-service{
+  padding-top: 120px;
+  padding-bottom: 120px;
+
+  .container{
+    .our-service-title{
+      @include head-lora-38;
+      margin-bottom: 40px;
+    }
+
+    .card-items{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .card-item{
+        margin-right: 26px;
+      }
+    }
+  }
+}
+
+
+.who-us{
+  padding-bottom: 120px;
+
+  .container{
+    display: flex;
+    justify-content: space-between;
+
+    .who-us-info{
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+
+      .who-us-title{
+        @include head-lora-38;
+        margin-bottom: 20px;
+      }
+
+      .who-us-description{
+        font-size: 14px;
+        line-height: 130%;
+        color: #1e1a2b;
+        margin-bottom: 40px;
+        max-width: 633px;
+        span{
+          font-family: "Montserrat", sans-serif;
+          font-weight: 500;
+        }
+      }
+
+      .who-us-advantages{
+        .who-us-advantages-title{
+          @include head-lora-38;
+          font-size: 26px;
+          margin-bottom: 20px;
+        }
+
+        .who-us-advantages-items{
+          display: grid;
+          gap: 20px 71px;
+          grid-template-columns: repeat(2, 316px);
+
+          .who-us-advantages-item{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .item-number{
+              position: relative;
+
+              .item-number-circle{
+                border-radius: 100%;
+                background-color: #b9d5fd;
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                top: 20px;
+                left: -8px;
+                z-index: -1;
+              }
+
+              .item-number-number{
+                font-family: Lora, sans-serif;
+                font-weight: 500;
+                font-size: 50px;
+                line-height: 130%;
+                color: #709fdc;
+              }
+            }
+
+            .item-description{
+              font-family: Montserrat, sans-serif;
+              font-size: 14px;
+              line-height: 130%;
+              color: #1e1a2b;
+              margin-left: 20px;
+              span{
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.popular-articles{
+  margin-bottom: 120px;
+
+  .container{
+    .popular-articles-title{
+      @include head-lora-38;
+      margin-bottom: 40px;
+    }
+
+    .popular-articles-items{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .popular-articles-action{
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-top: 40px;
+      justify-content: flex-end;
+      text-decoration: none;
+
+
+      &:hover{
+        span{
+          margin-right: 5px;
+          color: #456688;
+        }
+        svg{
+          path{
+            fill: #456688;
+          }
+        }
+      }
+
+      span{
+        margin-right: 14px;
+        font-size: 20px;
+        color: #709fdc;
+        transition: all 0.5s;
+      }
+      svg{
+        transition: all 0.5s;
+      }
+
+    }
+  }
+}
+
+.reviews{
+  margin-bottom: 120px;
+
+  .container{
+    .reviews-title{
+      @include head-lora-38;
+
+      margin-bottom: 20px;
+    }
+
+    .reviews-carousel{
+      position: relative;
+
+      .review-item{
+        width: 396px;
+        height: 267px;
+        padding: 30px;
+        border: 2px solid $blue-color;
+        border-radius: 5px;
+        box-sizing: border-box;
+
+
+        .review-item-head{
+          display: flex;
+          align-items: center;
+
+          .review-item-image{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-position: center;
+            background-size: cover;
+            margin-right: 26px;
+          }
+
+          .review-item-name{
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 130%;
+            color: $blue-color;
+          }
+        }
+
+        .review-item-text{
+          margin-top: 15px;
+          font-size: 16px;
+          line-height: 140%;
+          color: $text-color;
+        }
+      }
+
+      .reviews-arrows{
+        display: flex;
+        a{
+          top: calc(50% - 5px);
+          display: flex;
+          position: absolute;
+          cursor: pointer;
+
+          &.move-backward{
+            left: -41px;
+          }
+          &.move-forward{
+            right: -41px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.map{
+  padding-bottom: 120px;
+  .container{
+    display: flex;
+    align-items: flex-start;
+
+    .map-map{
+      iframe{
+        vertical-align: bottom;
+      }
+    }
+
+    .map-info{
+      margin-left: 26px;
+
+      .map-title{
+        @include head-lora-38;
+        margin-bottom: 20px;
+      }
+
+      .map-items{
+        max-width: 501px;
+
+        .map-item{
+          margin-bottom: 20px;
+          &:last-child{
+            margin-bottom: 0;
+          }
+          .map-item-name{
+            font-family: Montserrat, sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 130%;
+            color: $blue-color;
+            margin-bottom: 10px;
+          }
+
+          .map-item-description{
+            font-size: 14px;
+            line-height: 130%;
+            color: $text-color;
+          }
+
+          .map-item-socials{
+            .map-item-social-item{
+              cursor: pointer;
+              margin-right: 20px;
+
+              &:last-child{
+                margin-right: 0;
+              }
+            }
+          }
+        }
+      }
+
+
+    }
+
+
+  }
+}
+
+.modal{
+
+}
