@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
             }
 
             const loginResponse = data as LoginResponseType;
-
+            console.log(loginResponse);
 
             if (!loginResponse.accessToken ||
               !loginResponse.refreshToken ||
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
               throw new Error(error);
             }
 
-            this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
+            // this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
             this.authService.userId = loginResponse.userId;
             this._snackbar.open('Вы успешно авторизовались');
             this.router.navigate(['/']);

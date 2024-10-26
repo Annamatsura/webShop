@@ -23,7 +23,7 @@
 
       .header-content-menu{
         margin-left: 100px;
-        margin-right: 257px;
+        margin-right: 235px;
 
         nav ul{
           padding: 0;
@@ -33,6 +33,7 @@
           li{
             margin-right: 30px;
             list-style: none;
+            width: fit-content;
 
             &:last-child{
               margin-right: 0;

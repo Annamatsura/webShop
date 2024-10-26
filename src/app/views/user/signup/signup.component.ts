@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
               throw new Error(error);
             }
 
-            this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
+            // this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
             this.authService.userId = loginResponse.userId;
             this._snackbar.open('Вы успешно зарегистрировались');
             this.router.navigate(['/login']);

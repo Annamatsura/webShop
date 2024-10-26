@@ -102,6 +102,17 @@
             }
           }
 
+          .error-message{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-family: 'Lora', sans-serif;
+            font-weight: 400;
+            width: 422px;
+            font-size: 14px;
+            line-height: 130%;
+            color: #ff0000;
+          }
+
           select{
             width: 422px;
             border: 2px solid $blue-color;

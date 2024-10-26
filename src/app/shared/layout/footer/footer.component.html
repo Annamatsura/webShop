@@ -93,12 +93,19 @@
                  [ngStyle]="{'border-color': modalForm.get('name')?.invalid
                  && (modalForm.get('name')?.dirty || modalForm.get('name')?.touched) ? 'red' : ''}"
                  placeholder="Ваше имя" formControlName="name">
+          <div *ngIf="modalForm.get('name')?.invalid && (modalForm.get('name')?.dirty || modalForm.get('name')?.touched)" class="error-message">
+            <span *ngIf="modalForm.get('name')?.errors?.['required']">Имя обязательно</span>
+            <span *ngIf="modalForm.get('name')?.errors?.['pattern']">Имя должно начинаться с заглавной буквы и состоять только из кириллических букв.</span>
+          </div>
         </div>
         <div class="modal-form-input">
           <input type="text" class="input"
                  [ngStyle]="{'border-color': modalForm.get('phone')?.invalid
                  && (modalForm.get('phone')?.dirty || modalForm.get('phone')?.touched) ? 'red' : ''}"
                  placeholder="Ваш номер телефона" formControlName="phone">
+          <div *ngIf="modalForm.get('phone')?.invalid && (modalForm.get('phone')?.dirty || modalForm.get('phone')?.touched)" class="error-message">
+            <span *ngIf="modalForm.get('phone')?.errors?.['required']">Номер обязателен</span>
+          </div>
         </div>
       </div>
 

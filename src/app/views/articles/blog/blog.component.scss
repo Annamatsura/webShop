@@ -110,11 +110,11 @@
                 font-size: 24px;
 
                 &.plus{
-                  display: none;
+                  display: block;
                   padding-right: 2px;
                 }
                 &.minus{
-                  display: block;
+                  display: none;
                   padding-right: 5px;
                 }
               }
@@ -130,10 +130,10 @@
 
                 &.option{
                   &.plus{
-                    display: block;
+                    display: none;
                   }
                   &.minus{
-                    display: none;
+                    display: block;
                   }
                 }
               }

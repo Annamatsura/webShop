@@ -17,6 +17,7 @@ export class CommentService {
   getComments(offset: number, articleId: string): Observable<AllCommentsType>{
     return this.http.get<AllCommentsType>(environment.api + "comments?offset=" + offset + "&article=" + articleId);
   }
+
   setComment(text: string, id: string, accessToken: string): Observable<DefaultResponseType>{
     const headers= new HttpHeaders().set('x-auth', accessToken);
     return this.http.post<DefaultResponseType>(environment.api + "comments", {
@@ -24,12 +25,14 @@ export class CommentService {
       article: id
     }, {headers: headers});
   }
+
   setCommentAction(action: ActionType, id: string, accessToken: string): Observable<DefaultResponseType>{
     const headers= new HttpHeaders().set('x-auth', accessToken);
     return this.http.post<DefaultResponseType>(environment.api + "comments/" + id + "/apply-action", {
       action
     }, {headers: headers});
   }
+
   getCommentAction(id: string, accessToken: string): Observable<CommentActionsType | DefaultResponseType>{
     const headers= new HttpHeaders().set('x-auth', accessToken);
     return this.http.get<CommentActionsType | DefaultResponseType>(environment.api + "comments/" + id + "/actions", {

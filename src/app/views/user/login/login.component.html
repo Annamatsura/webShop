@@ -11,12 +11,20 @@
                  [ngStyle]="{'border-color': loginForm.get('email')?.invalid
                  && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched) ? 'red' : ''}"
                  placeholder="Электронная почта" formControlName="email">
+          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="error-message">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">Электронная почта обязательна.</span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">Введите корректный адрес электронной почты.</span>
+          </div>
         </div>
         <div class="auth-input">
           <input type="password" class="input"
                  [ngStyle]="{'border-color': loginForm.get('password')?.invalid
                  && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) ? 'red' : ''}"
                  placeholder="Пароль" formControlName="password">
+          <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error-message">
+            <span *ngIf="loginForm.get('password')?.errors?.['required']">Пароль обязателен.</span>
+            <span *ngIf="loginForm.get('password')?.errors?.['pattern']">Пароль должен содержать минимум 8 символов, одну цифру, одну строчную и одну заглавную букву.</span>
+          </div>
         </div>
 
         <div class="auth-checkbox">

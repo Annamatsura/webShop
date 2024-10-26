@@ -252,6 +252,11 @@
 
                     &.active {
                       color: $blue-color;
+                      .icon-violate{
+                        path{
+                          stroke: $blue-color !important;
+                        }
+                      }
                     }
                   }
 

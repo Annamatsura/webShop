@@ -13,6 +13,7 @@ import {DefaultResponseType} from "../../../../types/default-response.type";
 export class HeaderComponent implements OnInit {
 
   isLogged: boolean = false;
+  userName: string | null = null;
   userInfo: UserInfoType | null = null;
   accessTokenForName: string | null = null;
 
@@ -34,6 +35,10 @@ export class HeaderComponent implements OnInit {
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
       this.isLogged = isLoggedIn;
     });
+    this.authService.userInfo$
+      .subscribe(userName => {
+        this.userName = userName;
+      })
     this.accessTokenForName = localStorage.getItem(this.authService.accessTokenKey);
     if (this.accessTokenForName){
       this.authService.getUserName(this.accessTokenForName)
@@ -44,6 +49,7 @@ export class HeaderComponent implements OnInit {
           }
 
           this.userInfo = data as UserInfoType;
+          this.userName = this.userInfo.name;
         })
     }
   }

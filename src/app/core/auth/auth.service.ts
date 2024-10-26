@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, Subject, throwError} from "rxjs";
+import {map, Observable, Subject, switchMap, tap, throwError} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {DefaultResponseType} from "../../../types/default-response.type";
 import {LoginResponseType} from "../../../types/login-response.type";
@@ -17,20 +17,83 @@ export class AuthService {
   public isLogged$: Subject<boolean> = new Subject<boolean>();
   private isLogged: boolean = false;
 
+  public userInfo$: Subject<string> = new Subject<string>();
+  private userInfo: string = '';
+
+
   constructor(private http: HttpClient) {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
   }
 
-  login(email: string, password: string, rememberMe: boolean) : Observable<DefaultResponseType | LoginResponseType>{
+  login(email: string, password: string, rememberMe: boolean): Observable<DefaultResponseType | LoginResponseType> {
     return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'login', {
       email, password, rememberMe
-    })
+    }).pipe(
+      // После успешного логина, сохраняем токены
+      tap((response: any) => {
+        if ('accessToken' in response && 'refreshToken' in response) {
+          this.setTokens(response.accessToken, response.refreshToken);
+        }
+      }),
+
+      switchMap((response: LoginResponseType) => {
+        // Вызываем метод для получения информации о пользователе
+        return this.getUserName(response.accessToken).pipe(
+          // Обновляем информацию о пользователе в userInfo и уведомляем подписчиков
+          tap((userInfo: any) => {
+            if (userInfo.name) {
+              this.userInfo = userInfo.name;
+              this.userInfo$.next(this.userInfo); // Оповещаем подписчиков
+            }
+          }),
+          // Возвращаем исходный ответ (LoginResponseType) после выполнения всех действий
+          map(() => response)
+        );
+      })
+    );
   }
 
-  signup(name: string, email: string, password: string) : Observable<DefaultResponseType | LoginResponseType>{
+
+
+
+  // login(email: string, password: string, rememberMe: boolean) : Observable<DefaultResponseType | LoginResponseType>{
+  //   return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'login', {
+  //     email, password, rememberMe
+  //   })
+  // }
+
+  // signup(name: string, email: string, password: string) : Observable<DefaultResponseType | LoginResponseType>{
+  //   return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'signup', {
+  //     name, email, password
+  //   })
+  // }
+
+  signup(name: string, email: string, password: string): Observable<DefaultResponseType | LoginResponseType> {
     return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'signup', {
       name, email, password
-    })
+    }).pipe(
+      // После успешной регистрации, устанавливаем токены
+      tap((response: any) => {
+        if ('accessToken' in response && 'refreshToken' in response) {
+          this.setTokens(response.accessToken, response.refreshToken);
+        }
+      }),
+      switchMap((response: LoginResponseType) => {
+        // Вызываем метод для получения информации о пользователе
+        return this.getUserName(response.accessToken)
+          .pipe(
+            // Обновляем информацию о пользователе в userInfo и уведомляем подписчиков
+            tap((userInfo: any) => {
+              if (userInfo.name) {
+                this.userInfo = userInfo.name;
+                this.userInfo$.next(this.userInfo); // Оповещаем подписчиков
+              }
+            }),
+            // Возвращаем исходный ответ (LoginResponseType) после выполнения всех действий
+            map(() => response)
+        );
+      })
+    );
   }
 
   getUserName(accessToken: string): Observable<DefaultResponseType | UserInfoType>{

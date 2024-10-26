@@ -11,18 +11,31 @@
                  [ngStyle]="{'border-color': signupForm.get('name')?.invalid
                  && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched) ? 'red' : ''}"
                  placeholder="Ваше имя" formControlName="name">
+          <div *ngIf="signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)" class="error-message">
+            <span *ngIf="signupForm.get('name')?.errors?.['required']">Имя обязательно</span>
+            <span *ngIf="signupForm.get('name')?.errors?.['pattern']">Имя должно начинаться с заглавной буквы и состоять только из кириллических букв.</span>
+          </div>
         </div>
+
         <div class="auth-input">
           <input type="text" class="input"
                  [ngStyle]="{'border-color': signupForm.get('email')?.invalid
                  && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched) ? 'red' : ''}"
                  placeholder="Электронная почта" formControlName="email">
+          <div *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)" class="error-message">
+            <span *ngIf="signupForm.get('email')?.errors?.['required']">Электронная почта обязательна.</span>
+            <span *ngIf="signupForm.get('email')?.errors?.['email']">Введите корректный адрес электронной почты.</span>
+          </div>
         </div>
         <div class="auth-input">
           <input type="password" class="input"
                  [ngStyle]="{'border-color': signupForm.get('password')?.invalid
                  && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched) ? 'red' : ''}"
                  placeholder="Пароль" formControlName="password">
+          <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)" class="error-message">
+            <span *ngIf="signupForm.get('password')?.errors?.['required']">Пароль обязателен.</span>
+            <span *ngIf="signupForm.get('password')?.errors?.['pattern']">Пароль должен содержать минимум 8 символов, одну цифру, одну строчную и одну заглавную букву.</span>
+          </div>
         </div>
 
         <div class="auth-checkbox">
@@ -31,6 +44,10 @@
             Я принимаю <a routerLink="/policy" fragment="conditions" target="_blank">условия пользовательского соглашения</a> и даю
             <a routerLink="/policy" fragment="agreement" target="_blank">согласие на обработку персональных данных</a>.
           </label>
+
+        </div>
+        <div *ngIf="signupForm.get('agree')?.invalid && (signupForm.get('agree')?.dirty || signupForm.get('agree')?.touched)" class="error-message">
+          <span>Вы должны согласиться с условиями.</span>
         </div>
       </div>
 
