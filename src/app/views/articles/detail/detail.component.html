@@ -103,7 +103,7 @@
                     {{comment.user.name}}
                   </div>
                   <div class="detail-reviews-item-head-info-date">
-                    {{comment.date | date:"dd.mm.yyyy hh:mm"}}
+                    {{comment.date | date:"dd.MM.yyyy HH:mm"}}
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@
                 {{comment.text}}
               </div>
 
-              <div class="detail-reviews-item-icons">
+              <div  *ngIf="comment.id" class="detail-reviews-item-icons">
                 <div class="detail-reviews-item-icon">
                   <div class="detail-reviews-item-icon-number" [class.active]="toggleLikeDislike.get(comment.id)?.like">{{comment.likesCount}}</div>
                   <div class="detail-reviews-item-icon-icon" (click)="setCommentAction(actionComment.like, comment.id)">

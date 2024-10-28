@@ -33,6 +33,8 @@ export class DetailComponent implements OnInit {
 
   allCommentsCount: number = 0;
   commentsToShowCount: number = 3;
+  addCommentAction: boolean = false;
+  firstGetComment: boolean = true;
 
   commentForm = this.fb.group({
     comment: ['', Validators.required]
@@ -80,15 +82,24 @@ export class DetailComponent implements OnInit {
           this.userInfo = data as UserInfoType;
         }
       });
+
   }
+
 
   fetchComments(): void {
     if (!this.infoArticle) return;
     this.loading = true;
     const accessToken = localStorage.getItem(this.authService.accessTokenKey) || '';
 
-    // Запрашиваем все комментарии, если их меньше 3
-    const countToRequest = this.allCommentsCount < 3 ? this.allCommentsCount : this.commentsToShowCount;
+
+    // выставляем в offset нужное количество в зависимости от ситуации
+    let countToRequest = 0;
+    if (this.addCommentAction){ //если добавляется новый комментарий
+      countToRequest = 0;
+    } else {
+      countToRequest = this.allCommentsCount < 3 ? this.allCommentsCount : this.commentsToShowCount;
+    }
+
 
     // Запрашиваем комментарии
     this.commentService.getComments(countToRequest, this.infoArticle.id)
@@ -97,13 +108,25 @@ export class DetailComponent implements OnInit {
         this.allCommentsCount = data.allCount;
         this.noCommentsText = this.allCommentsCount === 0;
 
+
         // Объединяем текущие комментарии с новыми
-        this.comments = [...this.comments, ...tempComments];
+        // this.comments = [...this.comments, ...tempComments];
+        if (this.addCommentAction){
+          this.comments = [...tempComments];
+        } else {
+          this.comments = [...this.comments, ...tempComments];
+        }
+        console.log(countToRequest);
+        if (countToRequest === 3){
+
+          this.comments = this.comments.slice(0,3);
+        }
+
 
         // Проверяем, нужно ли показывать кнопку "Загрузить больше"
         this.loadMoreComments = this.comments.length + 3 < this.allCommentsCount;
 
-        // Загружаем действия для комментариев только один раз при первой загрузке комментариев
+        // Загружаем действия для комментариев
         if (this.comments.length === tempComments.length && this.infoArticle) {
           this.commentService.getAllCommentsActions(this.infoArticle.id, accessToken)
             .subscribe((actions) => {
@@ -127,13 +150,14 @@ export class DetailComponent implements OnInit {
               });
             });
         }
+        this.addCommentAction = false;
+        this.firstGetComment = false;
 
         this.loading = false;
       }, () => {
         this.loading = false;
       });
   }
-
 
 
 
@@ -149,48 +173,12 @@ export class DetailComponent implements OnInit {
     console.log(this.commentsToShowCount)
 
     // Загружаем комментарии с учетом увеличенного количества
+    this.addCommentAction = false;
     this.fetchComments();
   }
 
 
 
-  // addComment(): void {
-  //   const accessToken = localStorage.getItem(this.authService.accessTokenKey);
-  //   if (!this.infoArticle || !this.commentForm.valid || !accessToken) return;
-  //
-  //   this.commentService.setComment(this.commentForm.value.comment || '', this.infoArticle.id, accessToken)
-  //     .subscribe({
-  //       next: (response) => {
-  //         // Оповещение об успешном добавлении
-  //         this._snackbar.open(response.message || 'Комментарий добавлен!', 'Close');
-  //
-  //         // Создаем объект нового комментария
-  //         const newComment: CommentType = {
-  //           id: 'temporary-id-' + Date.now(), // временный id, пока не придет от сервера
-  //           text: this.commentForm.value.comment || '',
-  //           date: new Date().toISOString(),
-  //           likesCount: 0,
-  //           dislikesCount: 0,
-  //           user: this.userInfo!,
-  //         };
-  //
-  //         // Добавляем новый комментарий в начало списка
-  //         this.comments.unshift(newComment);
-  //
-  //         // Увеличиваем общее количество комментариев
-  //         this.allCommentsCount++;
-  //
-  //         // Сбрасываем форму после добавления комментария
-  //         this.commentForm.reset();
-  //
-  //         // Устанавливаем видимость кнопки "Загрузить ещё"
-  //         this.loadMoreComments = this.allCommentsCount > this.comments.length;
-  //       },
-  //       error: (errorResponse: HttpErrorResponse) => {
-  //         this._snackbar.open(errorResponse.error?.message || 'Ошибка добавления комментария', 'Close');
-  //       }
-  //     });
-  // }
   addComment(): void {
     const accessToken = localStorage.getItem(this.authService.accessTokenKey);
     if (!this.infoArticle || !this.commentForm.valid || !accessToken) return;
@@ -198,47 +186,29 @@ export class DetailComponent implements OnInit {
     // Получаем текст комментария из формы
     const commentText = this.commentForm.value.comment || '';
 
-    // Создаем временный комментарий
-    const temporaryComment: CommentType = {
-      id: `temp-${Date.now()}`,  // Временный ID для отслеживания
-      text: commentText,
-      date: new Date().toISOString(),
-      likesCount: 0,
-      dislikesCount: 0,
-      loading: true,  // Флаг временного комментария
-      user: {
-        id: this.userInfo?.id || 'temp-user-id',  // Используем ID текущего пользователя или временный ID
-        name: this.userInfo?.name || 'Anonymous'  // Используем имя текущего пользователя или 'Anonymous'
-      }
-    };
-
-    // Добавляем временный комментарий в начало списка комментариев
-    this.comments = [temporaryComment, ...this.comments];
-
     // Отправляем запрос на добавление комментария на сервер
     this.commentService.setComment(commentText, this.infoArticle.id, accessToken)
       .subscribe({
         next: (response) => {
-          // Удаляем временный комментарий из списка
-          this.comments = this.comments.filter(comment => comment.id !== temporaryComment.id);
-
           // Показать уведомление об успешном добавлении
-          this._snackbar.open(response.message || 'Комментарий добавлен!');
+          this._snackbar.open(response.message || 'Комментарий добавлен!', 'Close');
 
-          // Обновляем комментарии для отображения реального добавленного комментария
-          // this.fetchComments(this.commentsToShowCount + 1);
+          // Обновляем количество всех комментариев и состояние кнопки "Загрузить ещё"
+          this.allCommentsCount++;
+          this.loadMoreComments = this.allCommentsCount > this.comments.length + 3;
+          this.addCommentAction = true;
           this.fetchComments();
+
+          // Сбрасываем форму после добавления комментария
+          this.commentForm.reset();
+
         },
         error: (errorResponse: HttpErrorResponse) => {
-          // Удаляем временный комментарий в случае ошибки
-          this.comments = this.comments.filter(comment => comment.id !== temporaryComment.id);
-          this._snackbar.open(errorResponse.error?.message || 'Ошибка добавления комментария');
+          this._snackbar.open(errorResponse.error?.message || 'Ошибка добавления комментария', 'Close');
         }
       });
-
-    // Сбрасываем форму после добавления комментария
-    this.commentForm.reset();
   }
+
 
 
   setCommentAction(action: ActionType, commentId: string) {

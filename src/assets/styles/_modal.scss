@@ -116,6 +116,7 @@
           select{
             width: 422px;
             border: 2px solid $blue-color;
+            //background-color: transparent;
             border-radius: 3px;
             padding: 20px 16px;
             box-sizing: border-box;
@@ -139,7 +140,7 @@
 
             option{
               width: 422px;
-              background-color: $blue-color;
+              background-color: transparent;
               font-size: 14px;
               line-height: 130%;
               color: $blue-color;

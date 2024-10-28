@@ -1,5 +1,5 @@
 export type CommentType = {
-  id: string,
+  id?: string,
   text: string,
   date: string,
   likesCount: number,
